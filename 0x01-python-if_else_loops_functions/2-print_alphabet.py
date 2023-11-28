@@ -1,3 +1,5 @@
 #!/usr/bin/python3
+alpha = ""
 for i in range(97, 123):
-    print(f"{chr(i)}", end="")
+    alpha += "{}".format(chr(i))
+print(alpha)
