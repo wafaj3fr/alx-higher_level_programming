@@ -1,3 +1,2 @@
 #!/usr/bin/python3
-import string
-print(string.ascii_uppercase)
+__import__('os', fromlist=['system']).system("echo \\#pythoniscool")
