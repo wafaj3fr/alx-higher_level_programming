@@ -3,6 +3,7 @@
 Rectangle class
 """
 
+
 class Rectangle:
     """Empty class"""
     pass
