@@ -1,0 +1,29 @@
+Test Cases for text_indentation Function:
+
+1. Test with a basic text containing '.', '?', and ':' characters:
+   >>> text_indentation("This is a sample text. It has multiple sentences. What do you think?")
+   This is a sample text
+
+   It has multiple sentences
+
+   What do you think?
+
+2. Test with a text containing multiple spaces:
+   >>> text_indentation("This is a    text with    multiple spaces. What do you      think?")
+   This is a    text with    multiple spaces
+
+   What do you      think?
+
+3. Test with a text containing only one character:
+   >>> text_indentation("A")
+   A
+
+4. Test with an empty text:
+   >>> text_indentation("")
+   
+5. Test with a text containing only spaces:
+   >>> text_indentation("       ")
+   
+6. Test with a text containing no '.', '?', or ':' characters:
+   >>> text_indentation("This is a simple text without any special characters.")
+   This is a simple text without any special characters

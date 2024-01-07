@@ -1,0 +1,63 @@
+Test Cases for matrix_mul Function:
+
+1. Test with valid matrices for multiplication:
+   >>> matrix_a = [[1, 2, 3], [4, 5, 6]]
+   >>> matrix_b = [[7, 8], [9, 10], [11, 12]]
+   >>> matrix_mul(matrix_a, matrix_b)
+   [[58, 64], [139, 154]]
+
+2. Test with empty matrix m_a:
+   >>> matrix_a = []
+   >>> matrix_b = [[7, 8], [9, 10], [11, 12]]
+   >>> matrix_mul(matrix_a, matrix_b)
+   Traceback (most recent call last):
+       ...
+   ValueError: m_a can't be empty
+
+3. Test with empty matrix m_b:
+   >>> matrix_a = [[1, 2, 3], [4, 5, 6]]
+   >>> matrix_b = []
+   >>> matrix_mul(matrix_a, matrix_b)
+   Traceback (most recent call last):
+       ...
+   ValueError: m_b can't be empty
+
+4. Test with non-rectangular matrix m_a:
+   >>> matrix_a = [[1, 2, 3], [4, 5, 6], [7, 8]]
+   >>> matrix_b = [[7, 8], [9, 10], [11, 12]]
+   >>> matrix_mul(matrix_a, matrix_b)
+   Traceback (most recent call last):
+       ...
+   TypeError: Each row of m_a must be of the same size
+
+5. Test with non-rectangular matrix m_b:
+   >>> matrix_a = [[1, 2, 3], [4, 5, 6]]
+   >>> matrix_b = [[7, 8], [9, 10], [11, 12], [13, 14]]
+   >>> matrix_mul(matrix_a, matrix_b)
+   Traceback (most recent call last):
+       ...
+   TypeError: Each row of m_b must be of the same size
+
+6. Test with matrices that cannot be multiplied:
+   >>> matrix_a = [[1, 2, 3], [4, 5, 6]]
+   >>> matrix_b = [[7, 8], [9, 10]]
+   >>> matrix_mul(matrix_a, matrix_b)
+   Traceback (most recent call last):
+       ...
+   ValueError: m_a and m_b can't be multiplied
+
+7. Test with matrices containing non-numeric elements:
+   >>> matrix_a = [[1, 'a', 3], [4, 5, 6]]
+   >>> matrix_b = [[7, 8], [9, 10], [11, 12]]
+   >>> matrix_mul(matrix_a, matrix_b)
+   Traceback (most recent call last):
+       ...
+   TypeError: m_a should contain only integers or floats
+
+8. Test with matrices containing non-numeric elements:
+   >>> matrix_a = [[1, 2, 3], [4, 5, 6]]
+   >>> matrix_b = [[7, 8], [9, 10], [11, 'b']]
+   >>> matrix_mul(matrix_a, matrix_b)
+   Traceback (most recent call last):
+       ...
+   TypeError: m_b should contain only integers or floats

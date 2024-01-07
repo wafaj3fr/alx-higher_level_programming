@@ -1,0 +1,29 @@
+Test Cases for say_my_name Function:
+
+1. Test with valid first and last names:
+   >>> say_my_name("John", "Doe")
+   My name is John Doe
+
+2. Test with only a valid first name:
+   >>> say_my_name("Alice")
+   My name is Alice
+
+3. Test with an empty first name:
+   >>> say_my_name("")
+   My name is 
+
+4. Test with an empty last name:
+   >>> say_my_name("Bob", "")
+   My name is Bob
+
+5. Test with non-string first name:
+   >>> say_my_name(123, "Smith")
+   Traceback (most recent call last):
+       ...
+   TypeError: first_name must be a string
+
+6. Test with non-string last name:
+   >>> say_my_name("Jane", 456)
+   Traceback (most recent call last):
+       ...
+   TypeError: last_name must be a string

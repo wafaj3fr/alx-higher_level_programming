@@ -1,0 +1,36 @@
+Test Cases for print_square Function:
+
+1. Test with a positive integer size:
+   >>> print_square(3)
+   ###
+   ###
+   ###
+
+2. Test with size equal to 0:
+   >>> print_square(0)
+   
+3. Test with a large positive integer size:
+   >>> print_square(5)
+   #####
+   #####
+   #####
+   #####
+   #####
+
+4. Test with size less than 0:
+   >>> print_square(-2)
+   Traceback (most recent call last):
+       ...
+   ValueError: size must be >= 0
+
+5. Test with size as a float:
+   >>> print_square(2.5)
+   Traceback (most recent call last):
+       ...
+   TypeError: size must be an integer
+
+6. Test with size as a negative float:
+   >>> print_square(-3.5)
+   Traceback (most recent call last):
+       ...
+   ValueError: size must be >= 0
