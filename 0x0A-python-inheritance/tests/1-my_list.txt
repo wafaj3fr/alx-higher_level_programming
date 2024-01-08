@@ -1,0 +1,50 @@
+============================================
+MyList Class Test Cases
+============================================
+
+Test Case 1:
+  Description: Test print_sorted method on an empty list
+  Input:
+    >>> MyList = __import__('1-my_list').MyList
+    >>> my_list = MyList()
+  Expected Output:
+    >>> isinstance(my_list, list)
+    True
+    >>> my_list.print_sorted()
+    []
+
+Test Case 2:
+  Description: Test print_sorted method on a list with positive integers
+  Input:
+    >>> my_list.append(7)
+    >>> my_list.append(3)
+    >>> my_list.append(1)
+  Expected Output:
+    >>> my_list.print_sorted()
+    [1, 3, 7]
+
+Test Case 3:
+  Description: Test print_sorted method with zero values
+  Input:
+    >>> my_list.append(0)
+  Expected Output:
+    >>> my_list.print_sorted()
+    [0, 1, 3, 7]
+
+Test Case 4:
+  Description: Test print_sorted method with negative values
+  Input:
+    >>> my_list.append(-15)
+  Expected Output:
+    >>> my_list.print_sorted()
+    [-15, 0, 1, 3, 7]
+
+... (additional test cases)
+
+Test Case X:
+  Description: Test print_sorted method with NULL value
+  Input:
+    >>> my_list.append(NULL)
+  Expected Output:
+    >>> Traceback (most recent call last):
+    ... NameError: name 'NULL' is not defined

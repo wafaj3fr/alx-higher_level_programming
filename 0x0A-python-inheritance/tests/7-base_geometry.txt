@@ -1,0 +1,56 @@
+===================================
+Test Cases for BaseGeometry Class
+===================================
+
+Test Case 1:
+  Description: Test area method with an unimplemented subclass
+  Input:
+    >>> class UnimplementedGeometry(BaseGeometry):
+    ...     pass
+    >>> obj = UnimplementedGeometry()
+  Expected Output:
+    >>> obj.area()
+    Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+      File "<filename>", line XX, in area
+    Exception: area() is not implemented
+
+Test Case 2:
+  Description: Test area method with a subclass implementing area
+  Input:
+    >>> class CustomGeometry(BaseGeometry):
+    ...     def area(self):
+    ...         return 42
+    >>> obj = CustomGeometry()
+  Expected Output:
+    >>> obj.area()
+    42
+
+Test Case 3:
+  Description: Test integer_validator with valid input
+  Input:
+    >>> obj = BaseGeometry()
+    >>> obj.integer_validator("side_length", 5)
+  Expected Output: (No exception should be raised)
+
+Test Case 4:
+  Description: Test integer_validator with invalid input (non-integer)
+  Input:
+    >>> obj = BaseGeometry()
+    >>> obj.integer_validator("side_length", "invalid")
+  Expected Output:
+    >>> Traceback (most recent call last):
+    ...   File "<stdin>", line 1, in <module>
+    ...   File "<filename>", line XX, in integer_validator
+    ... TypeError: side_length must be an integer
+
+Test Case 5:
+  Description: Test integer_validator with invalid input (non-positive)
+  Input:
+    >>> obj = BaseGeometry()
+    >>> obj.integer_validator("side_length", 0)
+  Expected Output:
+    >>> Traceback (most recent call last):
+    ...   File "<stdin>", line 1, in <module>
+    ...   File "<filename>", line XX, in integer_validator
+    ... ValueError: side_length must be greater than 0
