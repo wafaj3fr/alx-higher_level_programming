@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 class Base():
     """
     Base class for managing id attributes in other classes.
@@ -7,7 +5,7 @@ class Base():
     Attributes:
         __nb_objects (int): Private class attribute to keep track of the number of objects created.
         id (int): Public instance attribute representing the unique identifier of an instance.
-
+        
     """
     __nb_objects = 0
     def __init__(self, id=None):
@@ -22,4 +20,4 @@ class Base():
             self.id = id
         else:
             self.__class__.__nb_objects += 1
-            id = self.__class__.__nb_objects
+            self.id = self.__class__.__nb_objects
