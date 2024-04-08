@@ -1,4 +1,5 @@
 #!/usr/bin/node
+//pirnt "JavaScript is amazing"
 
 'use strict';
 
