@@ -2,15 +2,12 @@
 
 'use strict';
 
-function factorial(n) {
-  const num = parseInt(n);
-  if (isNaN(num)) {
-    return 1;
-  } else if (num === 0 || num === 1) {
+function factorial (n) {
+  if ((isNaN(n)) || (n === 1)) {
     return 1;
   } else {
-    return num * factorial(num - 1);
+    return n * factorial(n - 1);
   }
 }
 
-console.log(factorial(process.argv[2]));
+console.log(factorial(parseInt(process.argv[2])));
