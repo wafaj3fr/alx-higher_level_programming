@@ -1,16 +1,46 @@
 #!/usr/bin/python3
-# Displays all values in the states table of the database hbtn_0e_0_usa
+"""Script to display values in the states table based on a search argument"""
 
-from sys import argv
 import MySQLdb
+import sys
 
 if __name__ == "__main__":
-    db = MySQLdb.connect(user=argv[1], passwd=argv[2], db=argv[3])
-    curs = db.cursor()
-    curs.execute("SELECT * FROM states WHERE name LIKE BINARY '{}'".format(argv[4]))
-    rows = curs.fetchall()
-    for r in rows:
-        print(r)
+    # Check if all four arguments are provided
+    if len(sys.argv) != 5:
+        print("Usage: {} username password database state_name".format(sys.argv[0]))
+        sys.exit(1)
 
-    curs.close()
-    db.close()
+    # Get MySQL connection parameters and state name from command line arguments
+    username, password, database, state_name = sys.argv[1:5]
+
+    try:
+        # Connect to MySQL server running on localhost at port 3306
+        connection = MySQLdb.connect(host="localhost", port=3306,
+                                     user=username, passwd=password,
+                                     db=database)
+
+        # Create a cursor object to execute SQL queries
+        cursor = connection.cursor()
+
+        # Construct SQL query with user input and execute it
+        query = "SELECT * FROM states WHERE name = %s ORDER BY states.id ASC"
+        cursor.execute(query, (state_name,))
+
+        # Fetch all rows from the result set
+        rows = cursor.fetchall()
+
+        # Display results
+        for row in rows:
+            print(row)
+
+    except MySQLdb.Error as e:
+        print("MySQLdb Error:", e)
+        sys.exit(1)
+
+    finally:
+        # Close cursor and connection
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
+
