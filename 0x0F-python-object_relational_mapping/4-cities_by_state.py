@@ -28,12 +28,11 @@ if __name__ == "__main__":
         query = "SELECT * FROM cities ORDER BY cities.id ASC"
         cursor.execute(query)
 
-        # Fetch all rows from the result set
-        rows = cursor.fetchall()
-
-        # Display results
-        for row in rows:
+        # Fetch one row at a time and display results
+        row = cursor.fetchone()
+        while row:
             print(row)
+            row = cursor.fetchone()
 
     except MySQLdb.Error as e:
         print("MySQLdb Error:", e)
