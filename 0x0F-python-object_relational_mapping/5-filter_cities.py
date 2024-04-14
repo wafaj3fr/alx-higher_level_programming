@@ -1,53 +1,28 @@
 #!/usr/bin/python3
 """
-Script to list all cities of a given state from the database hbtn_0e_4_usa
+Script that takes in the name of a state as an argument and lists
+all cities of that state, using the database
 """
-
 import MySQLdb
-import sys
+from sys import argv
 
-if __name__ == "__main__":
-    # Check if all four arguments are provided
-    if len(sys.argv) != 5:
-        print("Usage: {} username password database state_name".format(sys.argv[0]))
-        sys.exit(1)
+# The code should not be executed when imported
+if __name__ == '__main__':
+    # make a connection to the database
+    db = MySQLdb.connect(host="localhost", port=3306, user=argv[1],
+                         passwd=argv[2], db=argv[3])
 
-    # Get MySQL connection parameters and state name from command line arguments
-    username, password, database, state_name = sys.argv[1:5]
+    cur = db.cursor()
+    cur.execute("SELECT cities.id, cities.name FROM cities\
+                INNER JOIN states ON cities.state_id = states.id\
+                WHERE states.name = %s", [argv[4]])
 
-    try:
-        # Connect to MySQL server running on localhost at port 3306
-        connection = MySQLdb.connect(host="localhost", port=3306,
-                                     user=username, passwd=password,
-                                     db=database)
+    rows = cur.fetchall()
+    j = []
+    for i in rows:
+        j.append(i[1])
+    print(", ".join(j))
 
-        # Create a cursor object to execute SQL queries
-        cursor = connection.cursor()
-
-        # Construct SQL query to select cities of the given state and execute it
-        query = """
-                SELECT GROUP_CONCAT(cities.name SEPARATOR ', ')
-                FROM cities
-                INNER JOIN states ON cities.state_id = states.id
-                WHERE states.name = %s
-                ORDER BY cities.id ASC
-                """
-        cursor.execute(query, (state_name,))
-
-        # Fetch the result
-        result = cursor.fetchone()
-
-        # Display results
-        if result[0]:
-            print(result[0])
-
-    except MySQLdb.Error as e:
-        print("MySQLdb Error:", e)
-        sys.exit(1)
-
-    finally:
-        # Close cursor and connection
-        if cursor:
-            cursor.close()
-        if connection:
-            connection.close()
+    # Clean up process
+    cur.close()
+    db.close()

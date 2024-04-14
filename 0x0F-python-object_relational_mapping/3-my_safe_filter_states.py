@@ -1,45 +1,27 @@
 #!/usr/bin/python3
-"""Script to display values in the states table based on a search argument"""
-
+"""
+Script that takes in an argument and displays all values
+in the states table of hbtn_0e_0_usa where name matches the argument
+but safe from MySQL injections!
+"""
 import MySQLdb
-import sys
+from sys import argv
 
-if __name__ == "__main__":
-    # Check if all four arguments are provided
-    if len(sys.argv) != 5:
-        print("Usage: {} username password database state_name".format(sys.argv[0]))
-        sys.exit(1)
+# The code should not be executed when imported
+if __name__ == '__main__':
 
-    # Get MySQL connection parameters and state name from command line arguments
-    username, password, database, state_name = sys.argv[1:5]
+    # make a connection to the database
+    db = MySQLdb.connect(host="localhost", port=3306, user=argv[1],
+                         passwd=argv[2], db=argv[3])
 
-    try:
-        # Connect to MySQL server running on localhost at port 3306
-        connection = MySQLdb.connect(host="localhost", port=3306,
-                                     user=username, passwd=password,
-                                     db=database)
+    # It gives us the ability to have multiple seperate working environments
+    # through the same connection to the database.
+    cur = db.cursor()
+    cur.execute("SELECT * FROM states WHERE BINARY name = %s", [argv[4]])
 
-        # Create a cursor object to execute SQL queries
-        cursor = connection.cursor()
-
-        # Construct SQL query with parameterized query and execute it
-        query = "SELECT * FROM states WHERE name = %s ORDER BY states.id ASC"
-        cursor.execute(query, (state_name,))
-
-        # Fetch all rows from the result set
-        rows = cursor.fetchall()
-
-        # Display results
-        for row in rows:
-            print(row)
-
-    except MySQLdb.Error as e:
-        print("MySQLdb Error:", e)
-        sys.exit(1)
-
-    finally:
-        # Close cursor and connection
-        if cursor:
-            cursor.close()
-        if connection:
-            connection.close()
+    rows = cur.fetchall()
+    for i in rows:
+        print(i)
+    # Clean up process
+    cur.close()
+    db.close()
