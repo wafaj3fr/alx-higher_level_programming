@@ -26,7 +26,7 @@ if __name__ == "__main__":
 
         # Construct SQL query to select cities of the given state and execute it
         query = """
-                SELECT cities.id, cities.name
+                SELECT GROUP_CONCAT(cities.name SEPARATOR ', ')
                 FROM cities
                 INNER JOIN states ON cities.state_id = states.id
                 WHERE states.name = %s
@@ -34,12 +34,12 @@ if __name__ == "__main__":
                 """
         cursor.execute(query, (state_name,))
 
-        # Fetch all rows from the result set
-        rows = cursor.fetchall()
+        # Fetch the result
+        result = cursor.fetchone()
 
         # Display results
-        for row in rows:
-            print(row)
+        if result[0]:
+            print(result[0])
 
     except MySQLdb.Error as e:
         print("MySQLdb Error:", e)
