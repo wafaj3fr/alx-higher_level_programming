@@ -24,15 +24,21 @@ if __name__ == "__main__":
         # Create a cursor object to execute SQL queries
         cursor = connection.cursor()
 
-        # Construct SQL query to select all cities and execute it
-        query = "SELECT * FROM cities ORDER BY cities.id ASC"
+        # Construct SQL query to select cities along with their respective states
+        query = """
+                SELECT cities.id, cities.name, states.name
+                FROM cities
+                INNER JOIN states ON cities.state_id = states.id
+                ORDER BY cities.id ASC
+                """
         cursor.execute(query)
 
-        # Fetch one row at a time and display results
-        row = cursor.fetchone()
-        while row:
+        # Fetch all rows from the result set
+        rows = cursor.fetchall()
+
+        # Display results
+        for row in rows:
             print(row)
-            row = cursor.fetchone()
 
     except MySQLdb.Error as e:
         print("MySQLdb Error:", e)
